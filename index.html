@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WWW Build-A-Site - Premium Website Builder</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- YouTube IFrame Player API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+  </head>
+  <body>
+    <!-- Budget Counter -->
+    <div class="budget-counter">
+      <span class="budget-label">Budget:</span>
+      <span class="budget-amount" id="budgetAmount">$1000</span>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content" id="mainContent">
+      <div class="empty-state">
+        <div class="logo">WWW Build-A-Site</div>
+        <div class="tagline" id="watermark">
+          World's Wonderfullest* Website Builder
+        </div>
+      </div>
+    </div>
+
+    <!-- Left Panel (initially hidden) -->
+    <div class="left-panel" id="leftPanel">
+      <div class="panel-header">
+        <h3>Options</h3>
+        <div class="congrats">Congratulations! You can now see the GUI!</div>
+      </div>
+      <div class="panel-content">
+        <div class="feature-item">
+          <span>Add Header</span>
+          <button class="buy-btn" onclick="buyFeature('header', 200)">
+            $200
+          </button>
+        </div>
+        <div class="feature-item">
+          <span>Add Footer</span>
+          <button class="buy-btn" onclick="buyFeature('footer', 150)">
+            $150
+          </button>
+        </div>
+        <div class="feature-item">
+          <span>Change Font</span>
+          <button class="buy-btn" onclick="buyFeature('font', 100)">
+            $100
+          </button>
+        </div>
+        <div class="feature-item">
+          <span>Change Background Color</span>
+          <button class="buy-btn" onclick="buyFeature('bgcolor', 100)">
+            $100
+          </button>
+        </div>
+        <div class="feature-item">
+          <span>Remove Watermark</span>
+          <button class="buy-btn" onclick="buyFeature('watermark', 150)">
+            $150
+          </button>
+        </div>
+        <div class="feature-item">
+          <span>Monetize Your Site</span>
+          <button class="buy-btn" onclick="buyFeature('monetize', 100)">
+            $100
+          </button>
+        </div>
+        <div class="feature-item">
+          <span>Undo Button</span>
+          <button class="buy-btn" onclick="buyFeature('undo', 150)">
+            $150
+          </button>
+        </div>
+        <div class="feature-item">
+          <span>Save Progress</span>
+          <button class="buy-btn" onclick="buyFeature('save', 150)">
+            $150
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>🎉 Welcome to WWW Build-A-Site! 🎉</h2>
+        </div>
+        <div class="modal-content">
+          <p>We notice you're trying to build a website!</p>
+          <p><strong>Would you like to buy a GUI for $50?</strong></p>
+          <p class="small-text">
+            *GUI required to access basic website building features
+          </p>
+        </div>
+        <div class="modal-buttons">
+          <button class="modal-btn yes-btn" onclick="buyGUI()">
+            Yes! ($50)
+          </button>
+          <button class="modal-btn no-btn" onclick="declineGUI()">
+            No Thanks
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary Modals -->
+    <div class="modal-overlay" id="declineModal">
+      <div class="modal small-modal">
+        <div class="modal-content">
+          <p>😢 We're sorry to hear that!</p>
+          <p>Without a GUI, you can only stare at this blank screen.</p>
+          <p><strong>Reconsider for just $50?</strong></p>
+        </div>
+        <div class="modal-buttons">
+          <button class="modal-btn yes-btn" onclick="buyGUI()">
+            Fine, I'll buy it
+          </button>
+          <button class="modal-btn no-btn" onclick="stayBlank()">
+            I like blank screens
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="brokeModal">
+      <div class="modal small-modal">
+        <div class="modal-content">
+          <p>💸 Insufficient Funds!</p>
+          <p>You need more money to unlock this feature.</p>
+          <p>Would you like to add more funds to your account?</p>
+        </div>
+        <div class="modal-buttons">
+          <button class="modal-btn yes-btn" onclick="addFunds()">
+            Add $500 💳
+          </button>
+          <button class="modal-btn no-btn" onclick="closeBrokeModal()">
+            Stay Poor
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header Pin Modal -->
+    <div class="modal-overlay" id="headerPinModal">
+      <div class="modal small-modal">
+        <div class="modal-content">
+          <p>😅 Oops! Your header fell to the bottom!</p>
+          <p>Headers are supposed to be at the top.</p>
+          <p>
+            <strong>Would you like to pin it to the top for just $50?</strong>
+          </p>
+          <p class="small-text">*Basic physics not included in base package</p>
+        </div>
+        <div class="modal-buttons">
+          <button class="modal-btn yes-btn" onclick="pinHeader()">
+            Pin to Top ($50)
+          </button>
+          <button class="modal-btn no-btn" onclick="keepHeaderAtBottom()">
+            I like bottom headers
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Anchor Modal -->
+    <div class="modal-overlay" id="footerAnchorModal">
+      <div class="modal small-modal">
+        <div class="modal-content">
+          <p>⚓ Ahoy! Your footer is drifting away!</p>
+          <p>Footers aren't supposed to sail off into the sunset!</p>
+          <p><strong>Would you like to drop an anchor for $75?</strong></p>
+          <p class="small-text">
+            *Maritime navigation not included in base package
+          </p>
+        </div>
+        <div class="modal-buttons">
+          <button class="modal-btn yes-btn" onclick="anchorFooter()">
+            Drop Anchor! ($75)
+          </button>
+          <button class="modal-btn no-btn" onclick="letFooterDrift()">
+            Let it sail away
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monetization Modal -->
+    <div class="modal-overlay" id="monetizeModal">
+      <div class="modal small-modal">
+        <div class="modal-content">
+          <p>💰 Time to make money from your site!</p>
+          <p>Would you like to add advertisements to generate revenue?</p>
+          <p class="small-text">Choose wisely</p>
+        </div>
+        <div class="modal-buttons">
+          <button class="modal-btn yes-btn" onclick="addTinyAd()">
+            Yes, monetize! 💵
+          </button>
+          <button class="modal-btn no-btn" onclick="addManyAds()">
+            No, keep it clean
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Adblocker Modal -->
+    <div class="modal-overlay" id="adblockerModal">
+      <div class="modal small-modal">
+        <div class="modal-content">
+          <p>🛡️ Tired of all these ads?</p>
+          <p>We have the perfect solution!</p>
+          <p><strong>Buy our Premium AdBlocker™ for just $250!</strong></p>
+          <p class="small-text">*Removes the ads we added</p>
+        </div>
+        <div class="modal-buttons">
+          <button class="modal-btn yes-btn" onclick="buyAdblocker()">
+            Buy AdBlocker ($250)
+          </button>
+          <button class="modal-btn no-btn" onclick="liveWithAds()">
+            I'll live with the ads
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Watermark Footprint Modal -->
+    <div class="modal-overlay" id="watermarkFootprintModal">
+      <div class="modal small-modal">
+        <div class="modal-content">
+          <p>👻 Still seeing watermark traces?</p>
+          <p>Those faint outlines are the watermark's "footprint"!</p>
+          <p><strong>Remove the footprint completely for just $75?</strong></p>
+          <p class="small-text">*Complete invisibility guaranteed</p>
+        </div>
+        <div class="modal-buttons">
+          <button
+            class="modal-btn yes-btn"
+            onclick="removeWatermarkFootprint()"
+          >
+            Remove Footprint ($75)
+          </button>
+          <button class="modal-btn no-btn" onclick="keepWatermarkFootprint()">
+            Keep the traces
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
